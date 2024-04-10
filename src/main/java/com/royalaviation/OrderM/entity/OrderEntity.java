@@ -1,6 +1,8 @@
 package com.royalaviation.OrderM.entity;
 
 
+import java.util.Date;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -13,7 +15,7 @@ public class OrderEntity {
     private Long id;
     private String totalAmount;
     private String totalQuantity;
-
+    private Date orderDate;
     @ManyToOne
     @JoinColumn(name="companyId")
     private CompanyEntity companyEntity;

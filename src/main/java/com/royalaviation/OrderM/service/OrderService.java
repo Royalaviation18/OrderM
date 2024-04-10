@@ -6,6 +6,7 @@ import com.royalaviation.OrderM.entity.OrderEntity;
 
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,4 +22,5 @@ public interface OrderService {
     List<Order> findByCustomerEntityCustomerName(String customerName);
     List<Order> findByCompanyEntityId(Long id);
     List<Order> getAllOrders();
+    // List<Order> findByCompanyEntityIdAndCreatedAtGreaterThanEqual(Long companyId, Date date);
 }

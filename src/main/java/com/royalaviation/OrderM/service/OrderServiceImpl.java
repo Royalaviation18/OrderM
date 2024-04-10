@@ -1,14 +1,17 @@
 package com.royalaviation.OrderM.service;
 
-
 import com.royalaviation.OrderM.entity.*;
-import com.royalaviation.OrderM.repository.CompanyRepository;
 import com.royalaviation.OrderM.repository.OrderRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -16,12 +19,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     OrderRepository orderRepository;
-    
+
     @Override
     public String createOrder(Order order) {
         OrderEntity orderEntity = new OrderEntity();
         // from to
         BeanUtils.copyProperties(order, orderEntity);
+        orderEntity.setOrderDate(new Date());
         orderRepository.save(orderEntity);
         // orders.add(order);
         return "Saved Successfully";
@@ -36,6 +40,7 @@ public class OrderServiceImpl implements OrderService {
             order.setId(orderEntity.getId());
             order.setTotalAmount(orderEntity.getTotalAmount());
             order.setTotalQuantity(orderEntity.getTotalQuantity());
+            order.setOrderDate(orderEntity.getOrderDate());
             order.setCompanyEntity(orderEntity.getCompanyEntity());
             order.setCustomerEntity(orderEntity.getCustomerEntity());
             order.setItemEntity(orderEntity.getItemEntity());
@@ -87,7 +92,7 @@ public class OrderServiceImpl implements OrderService {
             orders.add(ord);
         }
         return orders;
-        
+
     }
 
     @Override
@@ -105,7 +110,7 @@ public class OrderServiceImpl implements OrderService {
             orders.add(order);
         }
         return orders;
-       
+
     }
 
     @Override
@@ -124,4 +129,31 @@ public class OrderServiceImpl implements OrderService {
         }
         return orders;
     }
+
+    // @Override
+    // public List<Order> findByCompanyEntityIdAndCreatedAtGreaterThanEqual(Long companyId, Date date) {
+    //     List<OrderEntity> ordersList = orderRepository.findByCompanyEntityIdAndCreatedAtGreaterThanEqual(companyId,
+    //             date);
+    //     LocalDate providedDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    //     LocalDate currentDate = LocalDate.now();
+    //     long daysDifference = ChronoUnit.DAYS.between(providedDate, currentDate);
+    //     if (daysDifference >= 2) {
+    //         List<Order> orders = new ArrayList<>();
+    //         for (OrderEntity orderEntity : ordersList) {
+    //             Order ord = new Order();
+    //             ord.setId(orderEntity.getId());
+    //             ord.setTotalAmount(orderEntity.getTotalAmount());
+    //             ord.setTotalQuantity(orderEntity.getTotalQuantity());
+    //             ord.setCompanyEntity(orderEntity.getCompanyEntity());
+    //             ord.setCustomerEntity(orderEntity.getCustomerEntity());
+    //             ord.setItemEntity(orderEntity.getItemEntity());
+    //             orders.add(ord);
+    //         }
+    //         return orders;
+    //     }
+    //     else {
+    //         return new ArrayList<>(); 
+    //     }
+        
+    // }
 }

@@ -8,6 +8,7 @@ import com.royalaviation.OrderM.service.OrderService;
 import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -16,6 +17,9 @@ import java.util.List;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController
@@ -66,6 +70,14 @@ public class OrderController {
     public List<Order> getAllOrderByName(@RequestParam("customerName") String customerName) {
         return orderService.findByCustomerEntityCustomerName(customerName);
     }   
+
+    // @GetMapping("/orders")
+    // public List<Order> getOrdersByCompanyIdAndCreatedAtGreaterThanEqual(
+    //         @RequestParam Long companyId,
+    //         @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
+    //     return orderService.findByCompanyEntityIdAndCreatedAtGreaterThanEqual(companyId, date);
+    // }
+    
 
 
     //getting reports based on companyId
