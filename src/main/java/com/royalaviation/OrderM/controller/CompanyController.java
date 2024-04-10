@@ -35,4 +35,5 @@ public class CompanyController {
     public String putMethodName(@PathVariable Long id, @RequestBody Company company) {
         return companyService.updateCompany(id, company);
     }
+    
 }
