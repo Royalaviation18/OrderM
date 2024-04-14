@@ -1,8 +1,6 @@
 package com.royalaviation.OrderM.entity;
 
-
 import java.util.Date;
-
 import jakarta.persistence.*;
 import lombok.Data;
 

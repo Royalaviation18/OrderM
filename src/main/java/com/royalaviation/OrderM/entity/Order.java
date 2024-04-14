@@ -1,8 +1,6 @@
 package com.royalaviation.OrderM.entity;
 
-
 import java.util.Date;
-
 import lombok.Data;
 
 @Data
